@@ -227,10 +227,15 @@ class MainWindow(QMainWindow):
 
     def open_settings(self):
         dialog = SettingsDialog(self, self.settings)
+        dialog.restart_repl_requested.connect(self.restart_repl_with_interpreter)
         if dialog.exec():
             # Settings saved by dialog on accept
             self.apply_theme()
-            pass
+
+    def restart_repl_with_interpreter(self, interpreter_path):
+        """Restart the REPL with a new interpreter."""
+        self.terminal.restart(new_command=[interpreter_path])
+        self.status_bar.showMessage(f"REPL restarted with {interpreter_path}")
 
     def apply_theme(self):
         theme_name = self.settings.get("theme")
@@ -245,7 +250,7 @@ class MainWindow(QMainWindow):
 
     def show_about(self):
         QMessageBox.about(self, "About LITHP", 
-                          "LITHP IDE - Lisp IDE To Help Programmers v1.0\n\nA student/beginner-friendly GNU CLisp environment.\n\n(c) 2025 Chuck Finch - Fragillidae Software")
+                          "LITHP IDE - Lisp IDE To Help Programmers v1.0\n\nA student/beginner-friendly CommonLisp environment.\n\n(c) 2025 Chuck Finch - Fragillidae Software")
 
     def new_file(self):
         self.editor_tabs.new_file()

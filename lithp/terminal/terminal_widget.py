@@ -21,9 +21,9 @@ class TerminalWidget(QWidget):
         self.stream = pyte.Stream(self.screen)
         
         # PTY Process
-        # Check settings for custom clisp path
-        clisp_path = self.settings.get("terminal", "clisp_path")
-        cmd = [clisp_path] if clisp_path else ['clisp']
+        # Check settings for custom lisp interpreter path
+        lisp_path = self.settings.get("terminal", "lisp_path")
+        cmd = [lisp_path] if lisp_path else ['sbcl']
         
         self.pty = PTYProcess(command=cmd)
         self.pty.data_received.connect(self.on_data_received)
@@ -178,11 +178,35 @@ class TerminalWidget(QWidget):
         cy = self.screen.cursor.y
         self.update(cx * self.char_width, cy * self.char_height, self.char_width, self.char_height)
         
-    def restart(self):
+    def restart(self, new_command=None):
+        """Restart the REPL, optionally with a new interpreter command.
+
+        Args:
+            new_command: Optional list containing the new interpreter command.
+                        If None, reloads from settings.
+        """
         self.pty.terminate_process()
         self.pty.wait()
         self.screen.reset()
+
+        # Reload settings to get potentially updated interpreter path
+        self.settings.load()
+
+        if new_command:
+            cmd = new_command
+        else:
+            lisp_path = self.settings.get("terminal", "lisp_path")
+            cmd = [lisp_path] if lisp_path else ['sbcl']
+
+        # Create new PTY process with the (possibly new) command
+        self.pty = PTYProcess(command=cmd)
+        self.pty.data_received.connect(self.on_data_received)
+        self.pty.process_exited.connect(self.on_process_exited)
         self.pty.start()
+
+        # Resize to current dimensions
+        self.pty.resize(self.rows, self.cols)
+        self.update()
 
     def clear(self):
         self.screen.reset()

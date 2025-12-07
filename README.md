@@ -2,23 +2,24 @@
 
 # LITHP (Lisp IDE To Help Programmers)
 
-**LITHP** is a beginner-friendly Integrated Development Environment (IDE) designed specifically for students and new programmers learning **Common Lisp**. Built with Python and PyQt6, it provides a modern, accessible interface for the powerful `clisp` environment.
+**LITHP** is a beginner-friendly Integrated Development Environment (IDE) designed specifically for students and new programmers learning **Common Lisp**. Built with Python and PyQt6, it provides a modern, accessible interface with support for multiple Lisp interpreters including SBCL, CLISP, ECL, and more.
 
 ## ✨ Features
 
 *   **Syntax Highlighting:** Clear color-coding for standard Lisp keywords, functions, and data types.
 *   **Parenthesis Matching:** Visual cues for matching parentheses to help navigate nested structures.
-*   **Integrated REPL:** A built-in Terminal running `clisp`, allowing for immediate code execution to see results instantly.
+*   **Integrated REPL:** A built-in Terminal running `sbcl`, allowing for immediate code execution to see results instantly.
 *   **Editor-to-REPL Workflow:** seamlessly send code selections or files directly to the REPL with shortcuts (Ctrl+Enter, Ctrl+L).
 *   **Project Navigation:** integrated File Browser for managing your Lisp source files.
 *   **Customization:** Switch between Dark and Light themes and configure editor preferences.
+*   **Multi-Interpreter Support:** Automatically detects installed Lisp interpreters (SBCL, CLISP, ECL, CCL, etc.) with easy switching via Preferences.
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 *   **Linux, macOS, or Windows**
 *   **Python 3.10+**
-*   **GNU CLISP** (`sudo apt install clisp` or `brew install clisp`)
+*   **SBCL** (`sudo apt install sbcl` or `brew install sbcl`)
 
 ### Installation & Running
 
@@ -52,7 +53,7 @@ The executable will be located in the `dist/LITHP/` folder.
 
 *   **Frontend:** Python 3.12, PyQt6
 *   **Terminal Emulation:** `pyte`, `ptyprocess`
-*   **Backend:** GNU CLISP
+*   **Backend:** SBCL (Steel Bank Common Lisp)
 
 ## 📜 License
 

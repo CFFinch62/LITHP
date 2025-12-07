@@ -9,7 +9,7 @@ class PTYProcess(QThread):
     
     def __init__(self, command=None, env=None):
         super().__init__()
-        self.command = command or ['clisp']
+        self.command = command or ['sbcl']
         self.env = env or os.environ.copy()
         self.process = None
         self.running = False

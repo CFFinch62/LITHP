@@ -18,7 +18,7 @@ class Settings:
             },
             "terminal": {
                 "scrollback_lines": 10000,
-                "clisp_path": "/usr/bin/clisp"
+                "lisp_path": "/usr/bin/sbcl"
             },
             "browser": {
                 "last_directory": str(Path.home()),
@@ -59,10 +59,16 @@ class Settings:
             return self.config[section]
         return self.config[section].get(key)
         
-    def set(self, section, key, value):
-        if section not in self.config:
-            self.config[section] = {}
-        self.config[section][key] = value
+    def set(self, section, key, value=None):
+        # If value is None, treat this as setting a top-level key
+        # set("theme", "dark") sets config["theme"] = "dark"
+        if value is None:
+            self.config[section] = key
+        else:
+            # set("editor", "font_size", 14) sets config["editor"]["font_size"] = 14
+            if section not in self.config:
+                self.config[section] = {}
+            self.config[section][key] = value
 
     def _update_dict_recursive(self, target, source):
         for k, v in source.items():
