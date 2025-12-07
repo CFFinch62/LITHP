@@ -1,6 +1,6 @@
 
 from PyQt6.QtWidgets import QTextEdit
-from PyQt6.QtGui import QTextCursor, QColor, QTextFormat
+from PyQt6.QtGui import QTextCursor, QColor
 
 class ParenMatcher:
     def __init__(self, editor):
@@ -64,10 +64,8 @@ class ParenMatcher:
 
     def create_selection(self, pos, color_str):
         selection = QTextEdit.ExtraSelection()
-        format = QTextFormat(selection.format)
-        format.setBackground(QColor(color_str))
-        selection.format = format
-        
+        selection.format.setBackground(QColor(color_str))
+
         cursor = self.editor.textCursor()
         cursor.setPosition(pos)
         cursor.movePosition(QTextCursor.MoveOperation.NextCharacter, QTextCursor.MoveMode.KeepAnchor)

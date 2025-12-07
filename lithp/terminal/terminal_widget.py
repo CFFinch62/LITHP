@@ -2,7 +2,7 @@
 import pyte
 from PyQt6.QtWidgets import QWidget
 from PyQt6.QtCore import Qt, QTimer
-from PyQt6.QtGui import QPainter, QFont, QColor, QFontMetrics, QKeyEvent, QBrush
+from PyQt6.QtGui import QPainter, QFont, QColor, QFontMetrics, QKeyEvent, QBrush, QMouseEvent
 
 from lithp.terminal.pty_process import PTYProcess
 from lithp.config.settings import Settings
@@ -39,7 +39,8 @@ class TerminalWidget(QWidget):
         self.cursor_timer.start(500)
         
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
-        
+        self.setAttribute(Qt.WidgetAttribute.WA_InputMethodEnabled, True)
+
         # Start the PTY
         self.pty.start()
 
@@ -98,7 +99,7 @@ class TerminalWidget(QWidget):
         text = event.text()
         key = event.key()
         modifiers = event.modifiers()
-        
+
         # Basic mapping - can be expanded
         if key == Qt.Key.Key_Return:
             self.write(b'\r')
@@ -120,9 +121,6 @@ class TerminalWidget(QWidget):
             self.write(b'\x04') # Ctrl+D
         elif text:
             self.write(text.encode('utf-8'))
-            
-        # Scroll to bottom on input?
-        # self.update() already handled by data echo
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -192,3 +190,15 @@ class TerminalWidget(QWidget):
         
     def interrupt(self):
         self.write(b'\x03')
+
+    def mousePressEvent(self, event: QMouseEvent):
+        self.setFocus(Qt.FocusReason.MouseFocusReason)
+        event.accept()
+
+    def focusInEvent(self, event):
+        self.cursor_visible = True
+        self.update()
+        super().focusInEvent(event)
+
+    def focusOutEvent(self, event):
+        super().focusOutEvent(event)

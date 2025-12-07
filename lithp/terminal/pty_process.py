@@ -17,9 +17,9 @@ class PTYProcess(QThread):
     def run(self):
         try:
             self.process = ptyprocess.PtyProcess.spawn(
-                self.command, 
+                self.command,
                 env=self.env,
-                echo=False # Avoid double echo if possible, though PTY usually echos
+                echo=True
             )
             self.running = True
             
