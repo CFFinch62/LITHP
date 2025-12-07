@@ -57,6 +57,3 @@ The executable will be located in the `dist/LITHP/` folder.
 ## 📜 License
 
 (c) 2025 Chuck Finch - Fragillidae Software
-
----
-*Created with the assistance of Google DeepMind Agents.*
