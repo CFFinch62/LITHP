@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="4" y="4" width="120" height="120" rx="24" fill="#ffffff" stroke="#42a5f5" stroke-width="3"/>
+  <!-- L-shaped bracket -->
+  <path d="M 35 28 L 35 100 L 70 100" fill="none" stroke="#f9a825" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Parentheses -->
+  <text x="70" y="70" font-size="44" font-family="monospace" font-weight="bold" fill="#42a5f5">()</text>
+</svg>

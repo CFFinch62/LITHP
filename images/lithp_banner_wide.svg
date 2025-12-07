@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="300" fill="#1e1e2e"/>
+  
+  <!-- Decorative parens in background -->
+  <text x="50" y="250" font-size="200" font-family="monospace" font-weight="bold" fill="#252536" opacity="0.5">(</text>
+  <text x="1050" y="250" font-size="200" font-family="monospace" font-weight="bold" fill="#252536" opacity="0.5">)</text>
+  
+  <!-- Icon -->
+  <g transform="translate(300, 70)">
+    <rect x="0" y="0" width="160" height="160" rx="32" fill="#2a2a3e" stroke="#42a5f5" stroke-width="4"/>
+    <path d="M 44 35 L 44 125 L 88 125" fill="none" stroke="#f9a825" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="88" y="88" font-size="56" font-family="monospace" font-weight="bold" fill="#42a5f5">()</text>
+  </g>
+  
+  <!-- LITHP text -->
+  <text x="500" y="175" font-size="96" font-family="'Courier New', monospace" font-weight="bold" fill="#f9a825">LITHP</text>
+  
+  <!-- Tagline -->
+  <text x="500" y="220" font-size="24" font-family="'Courier New', monospace" fill="#6c7086">Lisp IDE To Help Programmers</text>
+</svg>

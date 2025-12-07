@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&amp;display=swap');
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="200" fill="#1e1e2e"/>
+  
+  <!-- Icon (scaled down) -->
+  <g transform="translate(40, 36)">
+    <rect x="0" y="0" width="128" height="128" rx="24" fill="#2a2a3e" stroke="#42a5f5" stroke-width="3"/>
+    <path d="M 31 24 L 31 96 L 66 96" fill="none" stroke="#f9a825" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="66" y="66" font-size="44" font-family="monospace" font-weight="bold" fill="#42a5f5">()</text>
+  </g>
+  
+  <!-- LITHP text -->
+  <text x="200" y="115" font-size="72" font-family="'Source Code Pro', monospace" font-weight="600" fill="#f9a825">LITHP</text>
+  
+  <!-- Tagline -->
+  <text x="200" y="155" font-size="20" font-family="'Source Code Pro', monospace" fill="#6c7086">Lisp IDE To Help Programmers</text>
+</svg>
