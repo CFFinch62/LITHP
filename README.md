@@ -2,6 +2,8 @@
 
 # LITHP (Lisp IDE To Help Programmers)
 
+![LITHP Screenshot](images/LITHP.png)
+
 **LITHP** is a beginner-friendly Integrated Development Environment (IDE) designed specifically for students and new programmers learning **Common Lisp**. Built with Python and PyQt6, it provides a modern, accessible interface with support for multiple Lisp interpreters including SBCL, CLISP, ECL, and more.
 
 ## ✨ Features
