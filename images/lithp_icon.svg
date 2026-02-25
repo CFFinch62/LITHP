@@ -1,9 +1,409 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <!-- Background - deep black terminal -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#050f05"/>
+      <stop offset="70%" stop-color="#020802"/>
+      <stop offset="100%" stop-color="#010401"/>
+    </radialGradient>
+
+    <!-- Screen scanline atmosphere -->
+    <linearGradient id="scanAtmo" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00ff00" stop-opacity="0.02"/>
+      <stop offset="50%" stop-color="#00ff00" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#00ff00" stop-opacity="0.02"/>
+    </linearGradient>
+
+    <!-- Belt surface gradient -->
+    <linearGradient id="beltGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a2a0a"/>
+      <stop offset="40%" stop-color="#061806"/>
+      <stop offset="100%" stop-color="#030e03"/>
+    </linearGradient>
+
+    <!-- Belt roller gradient -->
+    <radialGradient id="rollerGrad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#1a4a1a"/>
+      <stop offset="100%" stop-color="#071207"/>
+    </radialGradient>
+
+    <!-- Processing station / L arm gradient -->
+    <linearGradient id="stationGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a3a0a"/>
+      <stop offset="100%" stop-color="#051505"/>
+    </linearGradient>
+
+    <!-- L glow -->
+    <radialGradient id="lGlowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="30%" stop-color="#88ff88" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#00aa00" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Paren item glow -->
+    <radialGradient id="parenGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00ff88" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#004400" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Filters -->
+    <filter id="crtGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="lGlowFilter" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="termGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="strongGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Scanline pattern -->
+    <pattern id="scanlines" x="0" y="0" width="400" height="4" patternUnits="userSpaceOnUse">
+      <rect width="400" height="1" y="0" fill="#000000" opacity="0.25"/>
+      <rect width="400" height="3" y="1" fill="none"/>
+    </pattern>
+
+    <!-- Belt chain pattern -->
+    <pattern id="beltPattern" x="0" y="0" width="24" height="20" patternUnits="userSpaceOnUse">
+      <rect width="22" height="18" rx="2" fill="#0a2a0a" stroke="#1a5a1a" stroke-width="0.8"/>
+      <line x1="0" y1="9" x2="22" y2="9" stroke="#0d3a0d" stroke-width="0.5"/>
+    </pattern>
+
+    <!-- Clip paths -->
+    <clipPath id="beltClip">
+      <rect x="52" y="232" width="296" height="36"/>
+    </clipPath>
+    <clipPath id="leftItemClip">
+      <rect x="62" y="185" width="62" height="50"/>
+    </clipPath>
+    <clipPath id="midItemClip">
+      <rect x="160" y="178" width="80" height="58"/>
+    </clipPath>
+    <clipPath id="rightItemClip">
+      <rect x="280" y="188" width="58" height="46"/>
+    </clipPath>
+  </defs>
+
   <!-- Background -->
-  <rect x="4" y="4" width="120" height="120" rx="24" fill="#2a2a3e" stroke="#42a5f5" stroke-width="3"/>
-  <!-- L-shaped bracket -->
-  <path d="M 35 28 L 35 100 L 70 100" fill="none" stroke="#f9a825" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Parentheses -->
-  <text x="70" y="70" font-size="44" font-family="monospace" font-weight="bold" fill="#42a5f5">()</text>
+  <rect width="400" height="400" fill="url(#bgGrad)" rx="40"/>
+
+  <!-- Scanline atmosphere overlay -->
+  <rect width="400" height="400" fill="url(#scanAtmo)" rx="40"/>
+
+  <!-- ============================================================ -->
+  <!-- TERMINAL HEADER BAR - retro computer feel                    -->
+  <!-- ============================================================ -->
+  <rect x="40" y="48" width="320" height="22" rx="3"
+        fill="#020802" stroke="#0d3a0d" stroke-width="1" opacity="0.9"/>
+  <g font-family="monospace" font-size="9" fill="#00cc00"
+     filter="url(#termGlow)" opacity="0.7">
+    <text x="52" y="63">LITHP v1.0  LIST-PROCESSOR  &gt; RUNNING_</text>
+  </g>
+  <!-- Blinking cursor -->
+  <rect x="330" y="54" width="7" height="11" fill="#00ff00" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;0;0.8" dur="1.2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- ============================================================ -->
+  <!-- PROCESSING STATION - the L arm overhead                      -->
+  <!-- ============================================================ -->
+
+  <!-- Ceiling rail that the arm hangs from -->
+  <rect x="48" y="88" width="304" height="8" rx="3"
+        fill="#0a2a0a" stroke="#1a5a1a" stroke-width="1.2"
+        filter="url(#softGlow)"/>
+  <!-- Rail highlights -->
+  <rect x="48" y="88" width="304" height="3" rx="2"
+        fill="#1a5a1a" opacity="0.5"/>
+
+  <!-- Rail mounting bolts -->
+  <g fill="#0d3a0d" stroke="#1a5a1a" stroke-width="0.8">
+    <circle cx="80"  cy="92" r="4"/>
+    <circle cx="160" cy="92" r="4"/>
+    <circle cx="240" cy="92" r="4"/>
+    <circle cx="320" cy="92" r="4"/>
+  </g>
+
+  <!-- L PROCESSING ARM - vertical drop from rail -->
+  <!-- Arm housing -->
+  <rect x="182" y="96" width="36" height="90" rx="4"
+        fill="url(#stationGrad)" stroke="#1a6a1a" stroke-width="2"
+        filter="url(#softGlow)"/>
+  <!-- Arm detail lines -->
+  <line x1="182" y1="120" x2="218" y2="120" stroke="#0d4a0d" stroke-width="1" opacity="0.8"/>
+  <line x1="182" y1="144" x2="218" y2="144" stroke="#0d4a0d" stroke-width="1" opacity="0.8"/>
+  <line x1="182" y1="168" x2="218" y2="168" stroke="#0d4a0d" stroke-width="1" opacity="0.8"/>
+  <!-- Arm side vents -->
+  <g fill="#0a2a0a" stroke="#1a5a1a" stroke-width="0.6">
+    <rect x="185" y="126" width="6" height="3" rx="1"/>
+    <rect x="185" y="133" width="6" height="3" rx="1"/>
+    <rect x="185" y="140" width="6" height="3" rx="1"/>
+    <rect x="209" y="126" width="6" height="3" rx="1"/>
+    <rect x="209" y="133" width="6" height="3" rx="1"/>
+    <rect x="209" y="140" width="6" height="3" rx="1"/>
+  </g>
+
+  <!-- L LETTER - glowing inside the processing head -->
+  <!-- Head unit at bottom of arm -->
+  <rect x="172" y="168" width="56" height="52" rx="6"
+        fill="#030e03" stroke="#22aa22" stroke-width="2"
+        filter="url(#softGlow)"/>
+  <!-- Head glow -->
+  <rect x="173" y="169" width="54" height="50" rx="5"
+        fill="#00ff44" opacity="0.05"/>
+
+  <!-- L glow layer -->
+  <text x="200" y="210"
+        font-family="Georgia, serif"
+        font-size="42"
+        font-weight="bold"
+        text-anchor="middle"
+        fill="#00ff44"
+        filter="url(#lGlowFilter)"
+        opacity="0.4">L</text>
+  <!-- L main -->
+  <text x="200" y="210"
+        font-family="Georgia, serif"
+        font-size="42"
+        font-weight="bold"
+        text-anchor="middle"
+        fill="#ffffff"
+        filter="url(#lGlowFilter)">L</text>
+
+  <!-- Processing beam - L emits downward onto belt -->
+  <rect x="196" y="220" width="8" height="14" rx="2"
+        fill="#00ff44" opacity="0.3" filter="url(#crtGlow)"/>
+  <rect x="194" y="226" width="12" height="6" rx="1"
+        fill="#00ff44" opacity="0.15"/>
+
+  <!-- ============================================================ -->
+  <!-- CONVEYOR BELT                                                 -->
+  <!-- ============================================================ -->
+
+  <!-- Belt surface -->
+  <rect x="52" y="232" width="296" height="36" rx="3"
+        fill="url(#beltGrad)" stroke="#1a5a1a" stroke-width="1.5"/>
+
+  <!-- Belt chain texture -->
+  <g clip-path="url(#beltClip)" opacity="0.6">
+    <rect x="52" y="232" width="296" height="36" fill="url(#beltPattern)"/>
+  </g>
+
+  <!-- Belt top edge highlight -->
+  <rect x="52" y="232" width="296" height="3" rx="2"
+        fill="#1a6a1a" opacity="0.5"/>
+
+  <!-- Belt divider notches -->
+  <g stroke="#1a5a1a" stroke-width="1" opacity="0.5">
+    <line x1="100" y1="232" x2="100" y2="268"/>
+    <line x1="148" y1="232" x2="148" y2="268"/>
+    <line x1="196" y1="232" x2="196" y2="268"/>
+    <line x1="244" y1="232" x2="244" y2="268"/>
+    <line x1="292" y1="232" x2="292" y2="268"/>
+  </g>
+
+  <!-- Belt motion arrows -->
+  <g font-family="monospace" font-size="8" fill="#0a3a0a" opacity="0.4">
+    <text x="108" y="253">&gt;&gt;</text>
+    <text x="156" y="253">&gt;&gt;</text>
+    <text x="252" y="253">&gt;&gt;</text>
+    <text x="300" y="253">&gt;&gt;</text>
+  </g>
+
+  <!-- LEFT ROLLER -->
+  <ellipse cx="65" cy="250" rx="18" ry="20"
+           fill="url(#rollerGrad)" stroke="#1a5a1a" stroke-width="2"
+           filter="url(#softGlow)"/>
+  <!-- Roller spokes -->
+  <g stroke="#0d3a0d" stroke-width="1.2" opacity="0.7">
+    <line x1="65" y1="230" x2="65" y2="270"/>
+    <line x1="47" y1="250" x2="83" y2="250"/>
+    <line x1="52" y1="235" x2="78" y2="265"/>
+    <line x1="78" y1="235" x2="52" y2="265"/>
+  </g>
+  <circle cx="65" cy="250" r="4" fill="#1a5a1a"/>
+
+  <!-- RIGHT ROLLER -->
+  <ellipse cx="335" cy="250" rx="18" ry="20"
+           fill="url(#rollerGrad)" stroke="#1a5a1a" stroke-width="2"
+           filter="url(#softGlow)"/>
+  <g stroke="#0d3a0d" stroke-width="1.2" opacity="0.7">
+    <line x1="335" y1="230" x2="335" y2="270"/>
+    <line x1="317" y1="250" x2="353" y2="250"/>
+    <line x1="322" y1="235" x2="348" y2="265"/>
+    <line x1="348" y1="235" x2="322" y2="265"/>
+  </g>
+  <circle cx="335" cy="250" r="4" fill="#1a5a1a"/>
+
+  <!-- Belt underside -->
+  <path d="M 65 268 Q 65 282 80 282 L 320 282 Q 335 282 335 268"
+        fill="#040f04" stroke="#0d3a0d" stroke-width="1" opacity="0.8"/>
+
+  <!-- ============================================================ -->
+  <!-- LIST ITEMS - nested () parentheses on the belt              -->
+  <!-- ============================================================ -->
+
+  <!-- ITEM 1 - leftmost, smallest, just entered belt -->
+  <g filter="url(#crtGlow)" opacity="0.75">
+    <rect x="64" y="192" width="54" height="42" rx="4"
+          fill="#020e02" stroke="#0d6a0d" stroke-width="1.2"/>
+    <text x="91" y="220"
+          font-family="monospace"
+          font-size="16"
+          font-weight="bold"
+          text-anchor="middle"
+          fill="#00cc00"
+          filter="url(#termGlow)">()</text>
+    <!-- Item label -->
+    <text x="91" y="200"
+          font-family="monospace"
+          font-size="7"
+          text-anchor="middle"
+          fill="#008800" opacity="0.7">NIL</text>
+  </g>
+
+  <!-- ITEM 2 - mid-left, medium nesting -->
+  <g filter="url(#crtGlow)" opacity="0.82">
+    <rect x="118" y="185" width="66" height="48" rx="4"
+          fill="#020e02" stroke="#0d6a0d" stroke-width="1.2"/>
+    <text x="151" y="216"
+          font-family="monospace"
+          font-size="13"
+          font-weight="bold"
+          text-anchor="middle"
+          fill="#00dd00"
+          filter="url(#termGlow)">(())</text>
+    <text x="151" y="198"
+          font-family="monospace"
+          font-size="7"
+          text-anchor="middle"
+          fill="#009900" opacity="0.7">CDR</text>
+  </g>
+
+  <!-- ITEM 3 - CENTER, under the L processor, most prominent, being processed -->
+  <!-- Glow effect showing item being processed -->
+  <ellipse cx="200" cy="212" rx="42" ry="22" fill="#00ff44" opacity="0.06"
+           filter="url(#strongGlow)"/>
+  <g filter="url(#strongGlow)" opacity="0.95">
+    <rect x="162" y="178" width="76" height="56" rx="5"
+          fill="#021402" stroke="#22cc22" stroke-width="2"/>
+    <!-- Active processing indicator -->
+    <rect x="163" y="179" width="74" height="54" rx="4"
+          fill="#00ff44" opacity="0.04"/>
+    <text x="200" y="214"
+          font-family="monospace"
+          font-size="14"
+          font-weight="bold"
+          text-anchor="middle"
+          fill="#00ff88"
+          filter="url(#strongGlow)">((()))</text>
+    <text x="200" y="196"
+          font-family="monospace"
+          font-size="7"
+          text-anchor="middle"
+          fill="#00cc66" opacity="0.9">CAR</text>
+    <!-- Processing indicator dots -->
+    <g fill="#00ff44" opacity="0.8">
+      <circle cx="170" cy="226" r="2"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="0.8s" repeatCount="indefinite"/></circle>
+      <circle cx="178" cy="226" r="2"><animate attributeName="opacity" values="0.2;0.8;0.2" dur="0.8s" repeatCount="indefinite"/></circle>
+      <circle cx="186" cy="226" r="2"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="0.8s" repeatCount="indefinite"/></circle>
+    </g>
+  </g>
+
+  <!-- ITEM 4 - mid-right, medium nesting -->
+  <g filter="url(#crtGlow)" opacity="0.82">
+    <rect x="248" y="185" width="66" height="48" rx="4"
+          fill="#020e02" stroke="#0d6a0d" stroke-width="1.2"/>
+    <text x="281" y="216"
+          font-family="monospace"
+          font-size="13"
+          font-weight="bold"
+          text-anchor="middle"
+          fill="#00dd00"
+          filter="url(#termGlow)">(())</text>
+    <text x="281" y="198"
+          font-family="monospace"
+          font-size="7"
+          text-anchor="middle"
+          fill="#009900" opacity="0.7">CONS</text>
+  </g>
+
+  <!-- ITEM 5 - rightmost, departing belt -->
+  <g filter="url(#crtGlow)" opacity="0.65">
+    <rect x="314" y="194" width="48" height="40" rx="4"
+          fill="#020e02" stroke="#0a5a0a" stroke-width="1"/>
+    <text x="338" y="220"
+          font-family="monospace"
+          font-size="13"
+          font-weight="bold"
+          text-anchor="middle"
+          fill="#00aa00"
+          filter="url(#termGlow)">()</text>
+    <text x="338" y="205"
+          font-family="monospace"
+          font-size="7"
+          text-anchor="middle"
+          fill="#007700" opacity="0.6">RET</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- FLOOR / BASE                                                  -->
+  <!-- ============================================================ -->
+  <rect x="40" y="282" width="320" height="18" rx="2"
+        fill="#020a02" stroke="#0a3a0a" stroke-width="1" opacity="0.8"/>
+  <!-- Floor Lisp code -->
+  <g font-family="monospace" font-size="8" fill="#083808"
+     filter="url(#termGlow)" opacity="0.6">
+    <text x="52" y="295">(defun process (list) (if (null list) nil (cons (car list) (process (cdr list)))))</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- SIDE LABELS - retro terminal readouts                        -->
+  <!-- ============================================================ -->
+  <!-- Left side - INPUT label -->
+  <g font-family="monospace" font-size="8" fill="#006600"
+     filter="url(#termGlow)" opacity="0.6">
+    <text x="48" y="310">IN&gt;</text>
+  </g>
+  <!-- Right side - OUTPUT label -->
+  <g font-family="monospace" font-size="8" fill="#006600"
+     filter="url(#termGlow)" opacity="0.6">
+    <text x="320" y="310">&lt;OUT</text>
+  </g>
+
+  <!-- Scanlines overlay for CRT effect -->
+  <rect width="400" height="400" fill="url(#scanlines)" rx="40" opacity="0.4"/>
+
 </svg>
